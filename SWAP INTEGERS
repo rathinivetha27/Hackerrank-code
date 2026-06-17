@@ -1,0 +1,21 @@
+import java.util.Scanner;
+public class NumberSwapper {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter first integer (a): ");
+        int a = scanner.nextInt();
+        System.out.print("Enter second integer (b): ");
+        int b = scanner.nextInt();
+        System.out.println("\n--- Before Swapping ---");
+        System.out.println("a = " + a + ", b = " + b);
+        swapUsingTemporaryVariable(a, b);
+        swapUsingArithmetic(a, b);
+        swapUsingXOR(a, b);
+        scanner.close();
+    }
+    public static void swapUsingTemporaryVariable(int a, int b) {
+        int temp = a;
+        a = b;
+        b = temp;
+        System.out.println("\n After swapping: a = " + a + ", b = " + b);
+    }
