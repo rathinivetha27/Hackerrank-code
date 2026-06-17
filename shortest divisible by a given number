@@ -1,0 +1,32 @@
+import java.util.Scanner;
+
+public class RepunitDivisibility {
+    public static int findShortestRepunitLength(int n) {
+        int remainder = 0;
+        for (int length = 1; length <= n; length++) {
+            remainder = (remainder * 10 + 1) % n;
+            if (remainder == 0) {
+                return length;
+            }
+        }
+        return -1; 
+    }
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter a number ending in 3: ");
+        int n = scanner.nextInt();
+        if (n % 10 != 3) {
+            System.out.println("Error: The number must end with the digit 3.");
+        } else {
+            int length = findShortestRepunitLength(n);
+            System.out.println("\n--- Result ---");
+            System.out.println("The shortest number of all 1s divisible by " + n + " has " + length + " ones.");
+            if (length <= 15) {
+                System.out.println("The number is: " + "1".repeat(length));
+            }
+        }
+
+        scanner.close();
+    }
+}
