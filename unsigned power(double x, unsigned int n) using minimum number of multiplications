@@ -1,0 +1,47 @@
+public class PowerCalculator {
+    public static class PowerResult {
+        public final double value;
+        public final int multiplicationCount;
+
+        public PowerResult(double value, int multiplicationCount) {
+            this.value = value;
+            this.multiplicationCount = multiplicationCount;
+        }
+    }
+    public static PowerResult power(double x, int n) {
+        if (n < 0) {
+            throw new IllegalArgumentException("Exponent must be an unsigned integer (non-negative).");
+        }
+        double result = 1.0;
+        double currentProduct = x;
+        int count = 0;
+        if (n == 0) {
+            return new PowerResult(1.0, 0);
+        }
+
+        while (n > 0) {
+            if (n % 2 == 1) {
+                result *= currentProduct;
+                count++;
+            }
+            n /= 2;
+            if (n > 0) { // Only square if there are more bits to process
+                currentProduct *= currentProduct;
+                count++;
+            }
+        }
+
+        return new PowerResult(result, count);
+    }
+
+    public static void main(String[] args) {
+        double x = 3.0;
+        int n = 13;
+
+        PowerResult result = power(x, n);
+
+        System.out.println(x + " raised to the power of " + n + " is: " + result.value);
+        System.out.println("Total multiplications used: " + result.multiplicationCount);
+        // Output for n=13: Total multiplications used: 6
+    }
+}
