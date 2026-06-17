@@ -1,0 +1,21 @@
+import java.util.Scanner;
+
+public class SignDetector {
+    public static boolean haveOppositeSigns(int x, int y) {
+        return (x ^ y) < 0;
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter the first integer: ");
+        int first = scanner.nextInt();
+
+        System.out.print("Enter the second integer: ");
+        int second = scanner.nextInt();
+        boolean result = haveOppositeSigns(first, second);
+        System.out.println("\n--- Result ---");
+        System.out.println("Do " + first + " and " + second + " have opposite signs? " + result);
+        scanner.close();
+    }
+}
