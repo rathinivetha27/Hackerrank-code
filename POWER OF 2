@@ -1,0 +1,21 @@
+import java.util.Scanner;
+
+public class PowerOfTwoChecker {
+    public static boolean isPowerOfTwo(int n) {
+        return (n > 0) && ((n & (n - 1)) == 0);
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter an integer: ");
+        int num = scanner.nextInt();
+
+        boolean result = isPowerOfTwo(num);
+
+        System.out.println("\n--- Result ---");
+        System.out.println("Is " + num + " a power of 2? " + result);
+
+        scanner.close();
+    }
+}
