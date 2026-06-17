@@ -1,0 +1,45 @@
+import java.util.Arrays;
+public class InPlaceMerge {
+    public static void mergeHalves(int[] arr) {
+        if (arr == null || arr.length <= 1) {
+            return;
+        }
+        int mid = -1;
+        for (int k = 1; k < arr.length; k++) {
+            if (arr[k] < arr[k - 1]) {
+                mid = k;
+                break;
+            }
+        }
+        if (mid == -1) {
+            return;
+        }
+        int i = 0;      
+        int j = mid;     
+        while (i < mid && j < arr.length) {
+            if (arr[i] <= arr[j]) {
+                i++;
+            } else {
+                int value = arr[j];
+                for (int k = j; k > i; k--) {
+                    arr[k] = arr[k - 1];
+                }
+                arr[i] = value;
+                i++;
+                mid++;
+                j++;
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        int[] arr = { 2, 3, 8, -1, 7, 10 };
+
+        System.out.println("Original Array: " + Arrays.toString(arr));
+        
+        mergeHalves(arr);
+        
+        System.out.println("Merged Sorted Array: " + Arrays.toString(arr));
+       
+    }
+}
