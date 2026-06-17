@@ -1,0 +1,66 @@
+public class LinkedListPalindrome {
+    public static class ListNode {
+        int val;
+        ListNode next;
+        
+        ListNode(int val) {
+            this.val = val;
+            this.next = null;
+        }
+    }
+    public static boolean isPalindrome(ListNode head) {
+        if (head == null || head.next == null) {
+            return true;
+        }
+        ListNode slow = head;
+        ListNode fast = head;
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        ListNode secondHalfHead = reverseList(slow);
+        ListNode firstHalfHead = head;
+        ListNode p1 = firstHalfHead;
+        ListNode p2 = secondHalfHead;
+        boolean isPalin = true;
+                while (p2 != null) {
+            if (p1.val != p2.val) {
+                isPalin = false;
+                break;
+            }
+            p1 = p1.next;
+            p2 = p2.next;
+        }
+       reverseList(secondHalfHead);
+        return isPalin;
+    }
+    private static ListNode reverseList(ListNode head) {
+        ListNode prev = null;
+        ListNode curr = head;
+        while (curr != null) {
+            ListNode nextNode = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = nextNode;
+        }
+        return prev;
+    }
+   public static ListNode buildList(int[] arr) {
+        if (arr.length == 0) return null;
+        ListNode head = new ListNode(arr[0]);
+        ListNode curr = head;
+        for (int i = 1; i < arr.length; i++) {
+            curr.next = new ListNode(arr[i]);
+            curr.next = null; // explicitly marking null termination
+            curr = curr.next;
+        }
+        return head;
+    }
+
+    public static void main(String[] args) {
+       ListNode head1 = buildList(new int[]{1, 2, 3, 2, 1});
+        System.out.println("Is list 1 a palindrome? " + isPalindrome(head1)); 
+        ListNode head2 = buildList(new int[]{1, 2, 3, 4});
+        System.out.println("Is list 2 a palindrome? " + isPalindrome(head2)); 
+            }
+}
